@@ -1,10 +1,14 @@
 import scala.annotation.tailrec
 import scala.collection.{immutable, mutable}
 
-def demo(m: MutableMap[Int]) = {
+def demo(m: MoreEfficientListMap[Int]) = {
 
-  m.put("", 42)
-  println(m.get(""))
+  // Nutzer
+  m.put("abc", 42)
+  //m.keys = Set.empty
+  println(m.get("abc"))
+
+
   //  m.put("a", 42)
   //  println(m.get("a"))
   //  println(m.get("a"))
@@ -13,7 +17,7 @@ def demo(m: MutableMap[Int]) = {
 }
 
 @main
-def mainContracts() = demo(ImmutableHashMapContract())
+def mainContracts() = demo(MoreEfficientListMap())
 
 /**
  * Implementation of [[MutableMap]] backed by a [[immutable.HashMap]].
@@ -144,6 +148,7 @@ class MoreEfficientListMapContract[V] extends MutableMap[V] {
     case Entry(key: String, value: V, rest: Store)
   }
 
+  // all keys in entries == keys
   private var entries: Store = Store.Empty
   private var keys: Set[String] = Set.empty
 
